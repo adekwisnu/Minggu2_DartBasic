@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hallo/detail_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,85 +12,74 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'Contacts',
+      theme: ThemeData(),
+      home: const DetailScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class DetailScreen extends StatelessWidget{
+  const DetailScreen({Key? key}) : super(key:key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  String _text = "Prima : ";
-  int a = 0;
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-      _text = "Prima: ";
-
-      for (int i = 0; i <= _counter; i++) {
-        for (int n = 1; n <= i; n++) {
-          if (i%n == 0) {
-            a++;
-          }
-        }
-        if (a == 2) {
-          _text += '${i}, ';
-        }
-        a=0;
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
+      body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Text(
-              _text,
-              style: Theme.of(context).textTheme.headline4,
-            )
-          ],
-        ),
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Image.asset('assets/images/monkasel.jpg'),
+          Container(
+            padding: EdgeInsets.all(16.0),
+            margin: EdgeInsets.only(top: 16.0),
+            child: Text("Surabaya Submarine Monument", textAlign: TextAlign.center, style: TextStyle(fontSize: 30.3, fontWeight: FontWeight.bold))),
+            Container(
+           margin: EdgeInsets.symmetric(vertical: 16.0), 
+           child: Row(
+             mainAxisAlignment: MainAxisAlignment.spaceAround,
+             children: [
+               Column(
+                 children: [
+                   Icon(Icons.calendar_today ),
+                   Text('Open'),
+                 ],
+               ),
+                Column(
+                  children : [
+                  Icon(Icons.access_time_filled),
+                   Text('09.00-10.00'),
+                  ],
+                ),
+                Column(
+                  children : [
+                  Icon(Icons.attach_money),
+                   Text('Rp.10.000'),
+                  ],
+                ),
+             ],
+           )
+          ),
+           Container(
+            child: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", textAlign: TextAlign.center, style: TextStyle(fontSize: 16.0),)
+          ), 
+          Container(
+            height: 150,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(4.0),
+                child : Image.asset('assets/images/monkasel.jpg'),
+                ),
+              ],
+                ),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
+    ),
+  );
+
 }
+}
+
